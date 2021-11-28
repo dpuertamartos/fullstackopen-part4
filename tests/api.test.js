@@ -143,7 +143,37 @@ describe('deletion of a blog', () => {
 
         expect(titles).not.toContain(blogToDelete.title)
     })
-  })  
+  })
+
+describe('update a blog', () => {
+    test('succeeds with status code 200 if id is valid', async () => {
+        const blogsInDb = async () => {
+            const blogs = await Blog.find({})
+            return blogs.map(blog => blog.toJSON())
+        }
+
+        const blogsAtStart = await blogsInDb()
+        const blogToUpdate = blogsAtStart[0]
+
+        const updatedBlog = {
+            likes: 69
+            }
+
+        await api
+            .put(`/api/blogs/${blogToUpdate.id}`)
+            .send(updatedBlog)
+            .expect(200)
+
+        const blogsAtEnd = await blogsInDb()
+
+        expect(blogsAtEnd).toHaveLength(
+        initialBlogs.length
+        )
+
+        const filteredBlogs = blogsAtEnd.filter(blog => blog.title===blogToUpdate.title)
+        expect(filteredBlogs[0].likes).toBe(69)
+    })
+})    
 
 
   
