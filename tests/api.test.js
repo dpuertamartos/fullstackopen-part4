@@ -70,6 +70,34 @@ test('post succeeds with valid data', async () => {
     )
 })  
 
+test('likes default is set to 0', async () => {
+    const newBlog = {
+        title: 'newtitle',
+        author: 'david123123',
+        url: 'http://falsa.com'
+        }
+    
+    await api
+        .post('/api/blogs')
+        .send(newBlog)
+        .expect(200)
+        .expect('Content-Type', /application\/json/) 
+    
+    const blogsInDb = async () => {
+        const blogs = await Blog.find({})
+        return blogs.map(blog => blog.toJSON())
+    }
+
+    const blogsAtEnd = await blogsInDb()
+    expect(blogsAtEnd).toHaveLength(initialBlogs.length + 1)
+    const contents = blogsAtEnd.map(n => n.title)
+    expect(contents).toContain(
+    'newtitle'
+    )
+    const filteredBlogs = blogsAtEnd.filter(blog => blog.author==='david123123')
+    expect(filteredBlogs[0].likes).toBe(0)
+})
+
 
   
 afterAll(() => {
