@@ -98,6 +98,27 @@ test('likes default is set to 0', async () => {
     expect(filteredBlogs[0].likes).toBe(0)
 })
 
+test('if title and url are missing you get 400 bad request', async () => {
+    const newBlog = {
+    author: 'david',
+    likes: 69
+    }
+
+    await api
+        .post('/api/blogs')
+        .send(newBlog)
+        .expect(400)  
+
+    const blogsInDb = async () => {
+        const blogs = await Blog.find({})
+        return blogs.map(blog => blog.toJSON())
+    }
+
+    const blogsAtEnd = await blogsInDb()
+    expect(blogsAtEnd).toHaveLength(initialBlogs.length)    
+
+})  
+
 
   
 afterAll(() => {
