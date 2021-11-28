@@ -31,10 +31,17 @@ test('blogs are returned as json', async () => {
 
 
 test('number of blogs returned is correct', async () => {
-const response = await api.get('/api/blogs')
+    const response = await api.get('/api/blogs')
 
-expect(response.body).toHaveLength(initialBlogs.length)
+    expect(response.body).toHaveLength(initialBlogs.length)
 })  
+
+test('check the id variable of blogs is defined as id', async () => {
+    const response = await api.get('/api/blogs')
+    expect(response.body[0].id).toBeDefined()
+})  
+
+
   
 afterAll(() => {
 mongoose.connection.close()
