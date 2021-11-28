@@ -42,6 +42,35 @@ test('check the id variable of blogs is defined as id', async () => {
 })  
 
 
+test('post succeeds with valid data', async () => {
+    const newBlog = {
+    title: 'newtitle',
+    author: 'david',
+    url: 'http://falsa.com',
+    likes: 69
+    }
+
+    await api
+        .post('/api/blogs')
+        .send(newBlog)
+        .expect(200)
+        .expect('Content-Type', /application\/json/)
+
+    const blogsInDb = async () => {
+        const blogs = await Blog.find({})
+        return blogs.map(blog => blog.toJSON())
+    }
+
+    const blogsAtEnd = await blogsInDb()
+    expect(blogsAtEnd).toHaveLength(initialBlogs.length + 1)
+
+    const contents = blogsAtEnd.map(n => n.title)
+    expect(contents).toContain(
+    'newtitle'
+    )
+})  
+
+
   
 afterAll(() => {
 mongoose.connection.close()
