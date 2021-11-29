@@ -7,8 +7,8 @@ const Blog = require('../models/blog')
 const User = require('../models/user')
 
 beforeEach(async () => {
-    await Blog.deleteMany({})
     await User.deleteMany({})
+    await Blog.deleteMany({})
 })
 
 describe('create a user', () => {
