@@ -1,9 +1,0 @@
-POST http://localhost:3003/api/blogs/ HTTP/1.1
-content-type: application/json
-
-{
-    "title": "probandousers2",
-    "userId": "61a50f0b794c32b139a922dc",
-    "url": "https://falsa.es",
-    "likes": 10
-}

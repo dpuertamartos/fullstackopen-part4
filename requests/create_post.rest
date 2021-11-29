@@ -1,9 +1,9 @@
 POST http://localhost:3003/api/blogs/ HTTP/1.1
 content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1sdXVra2FpIiwiaWQiOiI2MWE1MGYwYjc5NGMzMmIxMzlhOTIyZGMiLCJpYXQiOjE2MzgyMTMyNzJ9.wRHuIRCU3NZSLGcAd4LYGYbVo2pQ4kjv6hXkm0qtSfk
 
 {
     "title": "only Javascript",
-    "author": "Julian",
     "url": "asdsad",
     "likes": 5
 }
