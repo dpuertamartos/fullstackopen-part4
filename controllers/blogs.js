@@ -1,6 +1,6 @@
 const middleware = require('../utils/middleware')
 const blogsRouter = require('express').Router()
-const Blog = require('../models/Blog')
+const Blog = require('../models/blog')
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
 
@@ -19,7 +19,8 @@ blogsRouter.post('/', middleware.userExtractor , async (request, response) => {
     title: request.body.title,
     author: user._id,
     url: request.body.url,
-    likes: request.body.likes
+    likes: request.body.likes,
+    writer: request.body.writer
   })
 
   const savedBlog = await blog.save()
