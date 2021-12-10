@@ -1,0 +1,7 @@
+POST http://localhost:3001/api/blogs/61b381cdd82ab6533a3ff83d/comments HTTP/1.1
+content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRhdmlkIiwiaWQiOiI2MWE3YzQ2NmIyYzdiODY0MWJjY2E4ODgiLCJpYXQiOjE2MzkxNTQxNzV9.gmhynaGXYCIHwwYGkT6R8qQPqzOoWoci8r8XmysckJA
+
+{
+  "content": "probando"
+}
